@@ -10,7 +10,7 @@ data segment
     dd 16, 22, 382, 1356, 2390, 8000, 16000, 24486, 50065, 97479, 140417, 197514
     dd 345980, 590827, 803530, 11830000, 1843000, 2759000, 3753000, 4649000, 5937000 
     ;
-    dw 3, 7, 9, 13, 28, 130, 220, 476, 778, 1001, 1442, 2258, 2793, 4037, 5635, 8226
+    dw 3, 7, 9, 13, 28, 38, 130, 220, 476, 778, 1001, 1442, 2258, 2793, 4037, 5635, 8226
     dw 11542, 14430, 15257, 17800
 
 data ends
@@ -37,10 +37,9 @@ code segment
         mov bx, 0
         mov cx, 21
 
-        mov dh, 0
-        mov dl, 0
+        mov dh, 2
     show:
-
+        mov dl, 0
         ; year
         mov ax, es:[0 + bx]
         mov ds:[0], ax
@@ -53,25 +52,46 @@ code segment
         pop cx
 
         ; income
-        mov ax, es:[bx + 5]
-        mov dx, es:[bx + 7]
-     
+        push dx
+        mov ax, es:[5 + bx]
+        mov dx, es:[7 + bx]
+        call dtoc
+        pop dx
+        add dl, 5
+        push cx
+        mov cl, 2
+        call show_str
+        pop cx
+        
+        ; employee number
+        push dx
+        mov ax, es:[10 + bx]
+        mov dx, 0
+        call dtoc
+        pop dx
+        add dl, 10
+        push cx
+        mov cl, 2
+        call show_str
+        pop cx
+        
+        ; avg income
+        push dx
+        mov ax, es:[13 + bx]
+        mov dx, 0
+        call dtoc
+        pop dx
+
+        add dl, 10
+        push cx
+        mov cl, 2
+        call show_str
+        pop cx
+
         inc dh
         add bx, 16
         loop show
-        ; ; 120d18
-        ; mov dx, 0012H
-        ; mov ax, 0d18H
-        
-        ; mov bx, data
-        ; mov ds, bx
-        ; mov si, 0
-        ; call dtoc
-
-        ; mov dh, 8
-        ; mov dl, 3
-        ; mov cl, 2
-        ; call show_str
+   
 
         mov ax, 4c00H
         int 21H
@@ -192,7 +212,7 @@ code segment
    show_str:
     push ax
     push si
-    push cx
+   
     push es
     push cx
     push di
@@ -230,7 +250,6 @@ code segment
         pop di
         pop cx
         pop es
-        pop cx
         pop si
         pop ax
         ret
