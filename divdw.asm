@@ -11,10 +11,10 @@ start:
     int 21H
 
 divdw:
-    ; push ax
-    ; push dx
-    ; push cx
-    ; push bx
+    ; input H in dx, L in ax, divisor in cx
+    ; result H in dx, L in ax, rem in cx
+ 
+    push bx
 
     ; int(H/N)
     push ax
@@ -30,11 +30,7 @@ divdw:
     mov cx, dx
     mov dx, bx
 
-    ; pop bx
-    ; pop cx
-    ; pop dx
-    ; pop ax
-
+    pop bx
     ret
 code ends
 
