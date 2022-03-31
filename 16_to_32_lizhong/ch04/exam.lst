@@ -1,0 +1,8 @@
+     1 00000000 B83000                  mov ax, 0x30
+     2 00000003 BAC000                  mov dx, 0xC0
+     3 00000006 01D0                    add ax, dx
+     4                                  
+     5 00000008 00<rept>                times 502 db 0
+     6                                  
+     7 000001FE 55                      db 0x55 
+     8 000001FF AA                      db 0xAA

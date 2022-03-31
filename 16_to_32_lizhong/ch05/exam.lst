@@ -1,0 +1,35 @@
+     1                                  start:
+     2 00000000 B800B8                    mov ax, 0xb800
+     3 00000003 8ED8                      mov ds, ax
+     4                                  
+     5                                    ; "Assembly"
+     6 00000005 C606000041                mov byte [0x0000], 'A'
+     7 0000000A C606010004                mov byte [0x0001], 0x04
+     8                                  
+     9 0000000F C606020073                mov byte [0x0002], 's'
+    10 00000014 C606030004                mov byte [0x0003], 0x04
+    11                                  
+    12 00000019 C606040073                mov byte [0x0004], 's'
+    13 0000001E C606050004                mov byte [0x0005], 0x04
+    14                                  
+    15 00000023 C606060065                mov byte [0x0006], 'e'
+    16 00000028 C606070004                mov byte [0x0007], 0x04
+    17                                  
+    18 0000002D C60608006D                mov byte [0x0008], 'm'
+    19 00000032 C606090004                mov byte [0x0009], 0x04
+    20                                  
+    21 00000037 C6060A0062                mov byte [0x000a], 'b'
+    22 0000003C C6060B0004                mov byte [0x000b], 0x04
+    23                                  
+    24 00000041 C6060C006C                mov byte [0x000c], 'l'
+    25 00000046 C6060D0004                mov byte [0x000d], 0x04
+    26                                  
+    27 0000004B C6060E0079                mov byte [0x000e], 'y'
+    28 00000050 C6060F0004                mov byte [0x000f], 0x04
+    29                                  
+    30                                  again:
+    31 00000055 EBFE                      jmp again
+    32                                  
+    33                                  current:
+    34 00000057 00<rept>                  times (512 - 2 - (current - start)) db 0
+    35 000001FE 55AA                      db 0x55, 0xAA
