@@ -1,0 +1,3 @@
+echo building $1.asm...
+nasm -f bin $1.asm -o $1.bin
+echo build done!

@@ -1,0 +1,5 @@
+# bin
+*.bin
+
+# nasm lst
+*.list
